@@ -8,25 +8,46 @@ contract Game {
     // Define the game state
     uint public gameScore;
     bool public isGameOver;
+
     Needle needle;
 
-    Thread.Weave[] public replacements;
+    Thread.Weave[] public fabric;
 
     function playGame() public {
-        // Implement the game logic
-        // ...
+        require(!isGameOver, "Game over");
 
-        // Apply the replacements
+        gameScore += 1;
+
+        if (gameScore >= 10) {
+            isGameOver = true;
+        }
+
+        for (uint i = 0; i < fabric.length; i++) {
+            Thread.Weave memory replacement = fabric[i];
+
+            // Replace the opcode at the placeholder in the game logic
+            bytes memory gameLogic = abi.encodePacked(
+                replacement.opcode,
+                gameScore
+            );
+        }
+
+        // Create the new patch fabric
         Thread.Weave memory patch = Thread.Weave({
             placeholder: hex"5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B",
             opcode: bytes1(0x01)
         });
-        // Apply the replacements to the game logic
-        injectReplacement(patch);
+
+        // Apply the new fabric to patch the game logic
+        sew(patch);
     }
 
+    // function getFabric() public view returns (Thread.Weave memory) {
+    //     return;
+    // }
+
     // Allow game developers to inject custom logic at runtime
-    function injectReplacement(Thread.Weave memory replacement) public {
-        replacements.push(replacement);
+    function sew(Thread.Weave memory pin) public {
+        fabric.push(pin);
     }
 }

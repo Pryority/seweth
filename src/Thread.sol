@@ -7,7 +7,7 @@ library Thread {
         bytes1 opcode;
     }
 
-    function inject(Weave[] memory replacements) internal view {
+    function pull(Weave[] memory replacements) internal view {
         // Check if the contract is being called from a constructor
         bool isInsideConstructor;
         assembly {

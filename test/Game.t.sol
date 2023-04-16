@@ -6,10 +6,14 @@ import "../src/Needle.sol";
 import "../src/Thread.sol";
 import "../src/Game.sol";
 
-contract NeedleTest is Test {
+contract GameTest is Test {
     Game public game;
+    Needle public needle;
+    Thread public thread;
 
     function setUp() public {
         game = new Game();
+        needle = new Needle();
+        thread = new Thread();
     }
 }

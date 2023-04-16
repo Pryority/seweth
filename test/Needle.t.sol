@@ -14,7 +14,7 @@ contract NeedleTest is Test {
 
     function testSetUp() public {
         // Retrieve the value of silk using the public getter function
-        Thread.Weave[] memory silk = needle.getSilk();
+        Thread.Weave[] memory silk = needle.getFabric();
 
         // Compare the value of silk with the expected value
         assertEq(
@@ -26,7 +26,7 @@ contract NeedleTest is Test {
 
     function testSilk() public {
         // Retrieve the value of silk using the public getter function
-        Thread.Weave[] memory silk = needle.getSilk();
+        Thread.Weave[] memory silk = needle.getFabric();
 
         // Compare the value of silk with the expected value
         assertEq(
@@ -35,12 +35,21 @@ contract NeedleTest is Test {
         );
     }
 
-    // function testDoInjection() public {
+    function testGetFabric() public {
+        Thread.Weave[] memory fabric = needle.getFabric();
+        assertEq(fabric[0].opcode, bytes1(0x60));
+        assertEq(
+            fabric[0].placeholder,
+            hex"5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B"
+        );
+    }
+
+    // function testPull() public {
     //     // Call the doInjection function with a sample input
-    //     needle.doInjection();
+    //     needle.pull();
 
     //     // Retrieve the value of silk using the public getter function
-    //     Thread.Weave[] memory silk = needle.getSilk();
+    //     Thread.Weave[] memory silk = needle.getFabric();
 
     //     // Assert that the value of silk has been updated to the expected value
     //     assertEq(silk[0].placeholder, hex"0123456789abcdef");

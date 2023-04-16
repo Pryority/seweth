@@ -5,11 +5,11 @@ import "./Thread.sol";
 
 contract Needle {
     // Define the replacements to be made in the bytecode
-    Thread.Weave[] public silk;
+    Thread.Weave[] public fabric;
 
     constructor() {
         // Add replacements here
-        silk.push(
+        fabric.push(
             Thread.Weave({
                 placeholder: hex"5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B5B",
                 opcode: bytes1(0x60)
@@ -17,12 +17,16 @@ contract Needle {
         );
     }
 
-    function doInjection() public view {
+    function pull() public view {
         // Call the inject function from the library with the replacements
-        Thread.inject(silk);
+        Thread.pull(fabric);
     }
 
-    function getSilk() public view returns (Thread.Weave[] memory) {
-        return silk;
+    function sew(Thread.Weave memory pin) public {
+        fabric.push(pin);
+    }
+
+    function getFabric() public view returns (Thread.Weave[] memory) {
+        return fabric;
     }
 }
