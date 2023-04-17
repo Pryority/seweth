@@ -42,9 +42,10 @@ contract Game {
         sew(patch);
     }
 
-    // function getFabric() public view returns (Thread.Weave memory) {
-    //     return;
-    // }
+    function getFabric() public view returns (Thread.Weave[] memory) {
+        Thread.Weave[] memory thisFabric = fabric;
+        return thisFabric;
+    }
 
     // Allow game developers to inject custom logic at runtime
     function sew(Thread.Weave memory pin) public {
